@@ -1,4 +1,5 @@
-import { useState, useMemo, ReactNode, FormEvent } from 'react';
+import { useState, useMemo } from 'react';
+import type { ReactNode, FormEvent } from 'react';
 import { 
   LayoutDashboard, 
   Package, 
@@ -19,12 +20,10 @@ import {
   TrendingUp,
   AlertTriangle,
   Layers,
-  Shield,
   Database,
   Save,
   PackagePlus,
   Building2,
-  FileText,
   Lock
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -41,7 +40,7 @@ import {
   Pie, 
   Cell 
 } from 'recharts';
-import { Product, CartItem, View, Sale, StoreInfo, Category } from './types';
+import type { Product, CartItem, View, Sale, StoreInfo, Category } from './types';
 
 const INITIAL_PRODUCTS: Product[] = [
   { id: 'BEB001', name: 'Café Expresso', category: 'Bebida', price: 5.50, stock: 15 },
@@ -143,7 +142,7 @@ export default function App() {
     alert('Venda finalizada com sucesso!');
   };
 
-  const handleCreateProduct = (e: FormEvent) => {
+  const handleCreateProduct = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!newProduct.id || !newProduct.name || !newProduct.price) return;
     
@@ -481,7 +480,7 @@ export default function App() {
                               paddingAngle={5}
                               dataKey="value"
                             >
-                              {paymentMethodData.map((entry, index) => (
+                              {paymentMethodData.map((_entry, index) => (
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                               ))}
                             </Pie>
